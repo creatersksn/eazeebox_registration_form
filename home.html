@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EB-Registration</title>
+</head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<style>
+    h3{
+        margin-top: 6px;
+        font-size: x-large;
+        color: #e81f4b;
+        font-weight: 800;
+    }
+    h4{
+        margin-top: 3px;
+        font-size: medium;
+        color: #284d91;
+        font-weight: 600;
+    }
+    .s-button{
+        background-color: #e81f4b;
+        border: none;
+        
+    }
+ 
+    .card{
+        border-color: #e81f4bb9;
+        border-width: 2px;
+    }
+
+    .input{
+        border-color: #284d91;
+    }
+    label{
+        font-weight: 400;
+    }
+    span{
+        color: #e81f4b;
+    }
+
+</style>
+
+<body>
+    <div class="container mt-5">
+    <div class="card">
+        <img src="./eazee-landingpage-header.svg" alt="Example Image">
+        <img src="./why-choose-eazeebox.svg" alt="Example Image">
+        <div>
+            <h3 class="text-center">PARTNER WITH US</h3>
+            <h4 class="text-center">Register Your Retail Business & Enjoy Exciting Benefits!</h4>
+        </div>
+        <div class="card-body cborder">
+            
+            <form id="registrationForm">
+                <div class="form-group">
+                    <label for="businessName"><span>*</span>Business Name:</label>
+                    <input type="text" id="businessName" class="form-control" oninput="validateInput(this,'businessName','alphabets')" required>
+                </div>
+    
+                <div class="form-group">
+                    <label for="gstNumber"><span>*</span>GST Number:</label>
+                    <input type="text" id="gstNumber" class="form-control" oninput="validateInput(this,'gstNumber','gstNumber')"  required>
+                </div>
+    
+                <div class="form-group">
+                    <label for="businessOwnerName"><span>*</span>Business Owner Name:</label>
+                    <input type="text" id="businessOwnerName" class="form-control" oninput="validateInput(this,'businessOwnerName','alphabets')" required>
+                </div>
+
+              
+                <div class="form-group">
+                    <label for="businessOwnerSpouseName">Business Owner Spouse Name:</label>
+                    <input type="text" id="businessOwnerSpouseName" class="form-control" oninput="validateInput(this,'businessOwnerSpouseNam','alphabets')" >
+                </div>
+    
+                <div class="form-group">
+                    <label for="businessAddress"><span>*</span>Business Address:</label>
+                    <textarea id="businessAddress" class="form-control" required></textarea>
+                </div>
+    
+                <div class="form-group">
+                    <label for="whatsappNumber"><span>*</span>Whatsapp Number:</label>
+                    <input type="number" id="whatsappNumber" class="form-control" oninput="validateInput(this,'whatsappNumber','mobile')"  required>
+                </div>
+    
+                <div class="form-group">
+                    <label for="mobileNumber">Mobile Number:</label>
+                    <input type="text" id="mobileNumber" class="form-control" oninput="validateInput(this,'mobileNumber','mobile')" >
+                </div>
+    
+                <div class="form-group">
+                    <label for="pincode"><span>*</span>Pincode:</label>
+                    <input type="text" id="pincode" class="form-control" oninput="validateInput(this,'pincode','pincode')" required>
+                </div>
+    
+                <div class="form-group">
+                    <label for="city"><span>*</span>City:</label>
+                    <select id="city" class="form-control" required>
+                        <option value="Mumbai">Mumbai</option>
+                        <option value="Pune">Pune</option>
+                        <option value="Bangalore">Bangalore</option>
+                        
+                    </select>
+                </div>
+    
+                <div class="form-group">
+                    <label for="state"><span>*</span>State:</label>
+                    <select id="state" class="form-control" required>
+                        <option value="Maharashtra">Maharashtra</option>
+                        <option value="Karnataka">Karnataka</option>
+                        <option value="Delhi">Delhi</option>
+                    </select>
+                </div>
+    
+                <div class="form-group">
+                    <label for="panNumber"><span>*</span>PAN Number:</label>
+                    <input type="text" id="panNumber" class="form-control" pattern="[A-Z]{5}[0-9]{4}[A-Z]{1}" required>
+                </div>
+    
+                <div class="form-group">
+                    <label for="aadharNumber"><span>*</span>Aadhar Card Number:</label>
+                    <input type="text" id="aadharNumber" class="form-control" oninput="validateInput(this,'aadharNumber','aadharNumber')" required>
+                </div>
+    
+                <!-- Documents Fields-->
+                <div class="form-group">
+                    <label for="profilePhoto"><span>*</span>Profile Photo:</label>
+                    <input type="file" id="profilePhoto" class="form-control-file" required>
+                </div>
+    
+                <div class="form-group">
+                    <label for="aadharDocument">Aadhar Document:</label>
+                    <input type="file" id="aadharDocument" class="form-control-file" >
+                </div>
+    
+                <div class="form-group">
+                    <label for="panDocument">PAN Document:</label>
+                    <input type="file" id="panDocument" class="form-control-file" >
+                </div>
+    
+                <div class="form-group">
+                    <label for="gstCertification"><span>*</span>GST Certification Document:</label>
+                    <input type="file" id="gstCertification" class="form-control-file" required>
+                </div>
+    
+                <div class="form-group">
+                    <label for="cancelledCheque">Cancelled Cheque Document:</label>
+                    <input type="file" id="cancelledCheque" class="form-control-file" >
+                </div>
+    
+                <button type="button" class="btn btn-primary s-button" onclick="submitForm()">Submit</button>
+            </form>
+        </div>
+        <img src="./eazee-landingpage-footer.svg" alt="Example Image">
+    </div>
+    <!-- Modal for messages -->
+        <div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="messageModalLabel">Message</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                <p id="messageText"></p>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+            </div>
+        </div>
+</div>
+
+<script>
+function validateInput(inputElement,elementid, inputype) {
+    var validationMessageElement = document.getElementById(elementid);
+    var inputValue = inputElement.value;
+    if (inputype == "alphabets"){
+    var alphabetPattern = /^[A-Za-z\s]+$/;
+    if (!alphabetPattern.test(inputValue)) {
+        alert("Only alphabets are allowed.")
+        inputElement.value = inputValue.slice(0, -1);
+    }}
+    if (inputype == "mobile"){
+        if (inputValue.length > 10){
+            alert("Only 10 integers allowed")
+            inputElement.value = inputValue.slice(0, -1);
+        }
+
+    }
+    if (inputype == "pincode"){
+        if (inputValue.length > 6){
+            alert("Only 6 integers allowed")
+            inputElement.value = inputValue.slice(0, -1);
+        }
+
+    }
+    
+    if (inputype == "aadharNumber"){
+        if (inputValue.length > 12){
+            alert("Only 12 integers allowed")
+            inputElement.value = inputValue.slice(0, -1);
+        }
+
+    }
+    if (inputype == "gstNumber"){
+        if (inputValue.length > 15){
+            alert("Only 15 integers allowed")
+            inputElement.value = inputValue.slice(0, -1);
+        }
+
+    }
+}
+
+</script>
+
+  <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-storage.js"></script>
+  <script>
+    
+    const firebaseConfig = {
+    apiKey: "AIzaSyB25u8hCgDRTzLV8OnjWLZ-Epc_R_z9IP0",
+    authDomain: "eazeeregistration.firebaseapp.com",
+    databaseURL: "https://eazeeregistration-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "eazeeregistration",
+    storageBucket: "eazeeregistration.appspot.com",
+    messagingSenderId: "841969248499",
+    appId: "1:841969248499:web:278811cdc0f03aad2f2f86",
+    measurementId: "G-SJSYDBXSYR"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+        function showMessage(title, message) {
+        const modalTitle = document.getElementById('messageModalLabel');
+        const modalBody = document.getElementById('messageText');
+        
+        modalTitle.innerText = title;
+        modalBody.innerText = message;
+
+        $('#messageModal').modal('show');
+        }
+        
+    function validateAndSubmitForm() {
+      const businessName = document.getElementById('businessName').value;
+      const gstNumber = document.getElementById('gstNumber').value;
+      const businessOwnerName = document.getElementById('businessOwnerName').value;
+      const businessOwnerSpouseName = document.getElementById('businessOwnerSpouseName').value;
+      const businessAddress = document.getElementById('businessAddress').value;
+      const whatsappNumber = document.getElementById('whatsappNumber').value;
+    //   const mobileNumber = document.getElementById('mobileNumber').value;
+      const pincode = document.getElementById('pincode').value;
+      const city = document.getElementById('city').value;
+      const state = document.getElementById('state').value;
+      const panNumber = document.getElementById('panNumber').value;
+      const aadharNumber = document.getElementById('aadharNumber').value;
+
+    const files = document.querySelectorAll('input[type="file"]');
+    let areAllFilesSelected = true;
+
+    files.forEach(fileInput => {
+      if (!fileInput.files || !fileInput.files[0]) {
+        areAllFilesSelected = false;
+      }
+    });
+    const requiredFields = [
+    businessName, gstNumber,businessOwnerName, businessAddress, whatsappNumber, pincode, city, state, panNumber, aadharNumber,
+    document.getElementById('profilePhoto'),
+    // document.getElementById('aadharDocument'),
+    // document.getElementById('panDocument'),
+    document.getElementById('gstCertification'),
+    // document.getElementById('cancelledCheque')
+    // ... (other required fields)
+    ];
+
+
+    // Check if any of the required fields are empty
+    const isAnyFieldEmpty = requiredFields.some(fieldValue => {
+    if (typeof fieldValue === 'string') {
+        return fieldValue.trim() === '';
+    }
+    return false; // Ignore non-string values like file input elements
+    });
+
+
+    if (isAnyFieldEmpty) {
+    //   alert('Please fill out all required fields.');
+    showMessage('HEY!', 'PLEASE COMPLETE THE FORM.');
+
+      return; // Stop form submission
+    }
+
+    // Continue with form submission if all required fields are filled
+    submitForm();
+    }
+
+    function validateForm() {
+        const businessNamePattern = /^[A-Za-z]+(?: [A-Za-z]+)*$/;
+        const businessOwnerNamePattern = /^[A-Za-z]+(?: [A-Za-z]+)*$/;
+
+        const gstPattern = /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/;
+        const whatsappPattern = /[0-9]{10}/;
+        // const mobilePattern = /[0-9]{10}/;
+        const pincodePattern = /[0-9]{6}/;
+        const panPattern = /[A-Z]{5}[0-9]{4}[A-Z]{1}/;
+        const aadharPattern = /[0-9]{12}/;
+
+        const gstNumber = document.getElementById('gstNumber').value;
+        const whatsappNumber = document.getElementById('whatsappNumber').value;
+        // const mobileNumber = document.getElementById('mobileNumber').value;
+        const pincode = document.getElementById('pincode').value;
+        const panNumber = document.getElementById('panNumber').value;
+        const aadharNumber = document.getElementById('aadharNumber').value;
+        const profilePhotoInput = document.getElementById('profilePhoto');
+        const gstCertificationInput = document.getElementById('gstCertification');
+        const businessName = document.getElementById('businessName').value;
+        const businessOwnerName = document.getElementById('businessOwnerName').value;
+
+        const files = [
+                document.getElementById('profilePhoto'),
+                // document.getElementById('aadharDocument'),
+                // document.getElementById('panDocument'),
+                document.getElementById('gstCertification'),
+                // document.getElementById('cancelledCheque')
+                // ... (other file input fields)
+                ];
+
+                let areAllFilesSelected = true;
+
+                files.forEach(fileInput => {
+                if (!fileInput.files || !fileInput.files[0]) {
+                    areAllFilesSelected = false;
+                }
+                });
+
+        let errorMessage = '';
+
+        if (!businessNamePattern.test(businessName)) {
+            errorMessage += 'Invalid businessName. ';
+        }
+        if (!businessOwnerNamePattern.test(businessOwnerName)) {
+            errorMessage += 'businessOwnerName. ';
+        }
+
+
+
+        if (!gstPattern.test(gstNumber)) {
+            errorMessage += 'Invalid GST Number. ';
+        }
+
+        if (!whatsappPattern.test(whatsappNumber)) {
+            errorMessage += 'Invalid Whatsapp Number. ';
+        }
+
+        // if (!mobilePattern.test(mobileNumber)) {
+        //     errorMessage += 'Invalid Mobile Number. ';
+        // }
+
+        if (!pincodePattern.test(pincode)) {
+            errorMessage += 'Invalid Pincode. ';
+        }
+
+        if (!panPattern.test(panNumber)) {
+            errorMessage += 'Invalid PAN Number. ';
+        }
+
+        if (!aadharPattern.test(aadharNumber)) {
+            errorMessage += 'Invalid Aadhar Number. ';
+        }
+
+        // if (!areAllFilesSelected) {
+        //     errorMessage += 'Please upload all required files. ';
+        // }
+
+
+        if (!profilePhotoInput.files[0]) {
+            errorMessage += 'Invalid Profile Photo ';
+        }
+
+        if (!gstCertificationInput.files[0]) {
+            errorMessage += 'Invalid GST Certification. ';
+        }
+
+        if (errorMessage !== '') {
+            showMessage('Error', errorMessage);
+            return false; // Prevent form submission
+        }
+        return true; // Proceed with form submission
+    }
+function submitForm() {
+  if (validateForm()) {
+    showMessage('Status', 'Please wait while files are being uploaded..');
+
+    const businessName = document.getElementById('businessName').value;
+    const gstNumber = document.getElementById('gstNumber').value;
+    const businessOwnerName = document.getElementById('businessOwnerName').value;
+    const businessOwnerSpouseName = document.getElementById('businessOwnerSpouseName').value;
+    const businessAddress = document.getElementById('businessAddress').value;
+    const whatsappNumber = document.getElementById('whatsappNumber').value;
+    const pincode = document.getElementById('pincode').value;
+    const city = document.getElementById('city').value;
+    const state = document.getElementById('state').value;
+    const panNumber = document.getElementById('panNumber').value;
+    const aadharNumber = document.getElementById('aadharNumber').value;
+
+    // const files = document.querySelectorAll('input[type="file"]');
+    const files = [
+                    document.getElementById('profilePhoto'),
+                    // document.getElementById('aadharDocument'),
+                    // document.getElementById('panDocument'),
+                    document.getElementById('gstCertification'),
+                    // document.getElementById('cancelledCheque')
+                    // ... (other file input fields)
+                    ];
+    
+    let areAllFilesSelected = true;
+
+    files.forEach(fileInput => {
+      if (!fileInput.files || !fileInput.files[0]) {
+        areAllFilesSelected = false;
+      }
+    });
+
+    // if (!areAllFilesSelected) {
+    //   showMessage('Error', 'Please upload all required files.');
+    //   return;
+    // }
+
+    const currentDate = new Date();
+    const formattedDate = currentDate.toISOString().replace(/[:.]/g, "-");
+
+    const storageFolderName = `${formattedDate}-${gstNumber}`;
+    const storageRef = firebase.storage().ref(storageFolderName);
+    const formDataRef = storageRef.child('customer_details.json');
+
+    const uploadPromises = [];
+
+    files.forEach(fileInput => {
+      const file = fileInput.files[0];
+      if (file) {
+        const label = fileInput.previousElementSibling.textContent.replace('*', '');
+        const fileName = `${label}-${gstNumber}-${file.name}`;
+        const fileRef = storageRef.child(fileName);
+        uploadPromises.push(fileRef.put(file));
+      }
+    });
+
+    const formData = {
+      businessName: businessName,
+      gstNumber: gstNumber,
+      businessOwnerName: businessOwnerName,
+      businessOwnerSpouseName: businessOwnerSpouseName,
+      businessAddress: businessAddress,
+      whatsappNumber: whatsappNumber,
+      pincode: pincode,
+      city: city,
+      state: state,
+      panNumber: panNumber,
+      aadharNumber: aadharNumber
+      // Collect other fields similarly...
+    };
+
+    const formDataBlob = new Blob([JSON.stringify(formData)], { type: 'application/json' });
+    uploadPromises.push(formDataRef.put(formDataBlob));
+
+    Promise.all(uploadPromises)
+      .then(() => {
+        showMessage('Success', 'Registration has been completed successfully!');
+      })
+      .catch(error => {
+        showMessage('Error', 'Error uploading files: ' + error.message);
+      });
+  }
+}
+
+  </script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
