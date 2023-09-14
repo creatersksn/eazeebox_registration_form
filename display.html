@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Firebase Storage - List Files in Table</title>
+<style>
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px solid #ddd;
+    font-size: small;
+  }
+  th, td {
+    padding: 8px;
+    text-align: left;
+    border: 1px solid #ddd;
+  }
+  a:visited {
+    color: green;
+  }
+</style>
+<script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-storage.js"></script>
+</head>
+<body>
+<table id="fileTable">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Folder Name</th>
+      <th>Files</th>
+      <th>Customer Details</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+<script>
+   var firebaseConfig = {
+    apiKey: "AIzaSyB25u8hCgDRTzLV8OnjWLZ-Epc_R_z9IP0",
+    authDomain: "eazeeregistration.firebaseapp.com",
+    databaseURL: "https://eazeeregistration-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "eazeeregistration",
+    storageBucket: "eazeeregistration.appspot.com",
+    messagingSenderId: "841969248499",
+    appId: "1:841969248499:web:278811cdc0f03aad2f2f86",
+    measurementId: "G-SJSYDBXSYR"
+    };
+   firebase.initializeApp(firebaseConfig);
+
+  var fileTableBody = document.querySelector("#fileTable tbody");
+  var storage = firebase.storage();
+  var storageRef = storage.ref();
+  var serialNumber = 1;
+
+  storageRef.listAll().then(function(result) {
+    result.prefixes.forEach(function(folderRef) {
+      var folderName = folderRef.name;
+      var row = fileTableBody.insertRow();
+      var serialCell = row.insertCell(0);
+      var folderCell = row.insertCell(1);
+      var filesCell = row.insertCell(2);
+      var jsonCell = row.insertCell(3);
+
+      serialCell.textContent = serialNumber;
+      serialNumber++;
+
+      folderRef.getMetadata().then(function(metadata) {
+        var lastModified = new Date(metadata.updated).toLocaleString();
+        folderCell.textContent = folderName;
+        folderCell.title = "Last Modified: " + lastModified;
+      }).catch(function(error) {
+        console.error("Error getting folder metadata:", error);
+        folderCell.textContent = folderName;
+      });
+      
+      var files = [];
+      var jsonLink = "";
+
+      folderRef.listAll().then(function(folderResult) {
+        folderResult.items.forEach(function(itemRef) {
+          itemRef.getDownloadURL().then(function(url) {
+            var fileLink = document.createElement("a");
+            fileLink.textContent = itemRef.name;
+            fileLink.href = url;
+            fileLink.target = "_blank";
+            
+            if (itemRef.name.endsWith('.json')) {
+              jsonLink = "<a href='" + url + "' target='_blank'>Customer Details</a>";
+            } else {
+              files.push(fileLink.outerHTML);
+            }
+            
+            filesCell.innerHTML = files.join("<br>");
+            jsonCell.innerHTML = jsonLink;
+          }).catch(function(error) {
+            console.error("Error getting download URL:", error);
+          });
+        });
+      }).catch(function(error) {
+        console.error("Error listing files:", error);
+      });
+    });
+  }).catch(function(error) {
+    console.error("Error listing folders:", error);
+  });
+
+  document.addEventListener("click", function (event) {
+    if (event.target.tagName === "A") {
+      event.target.style.color = "green";
+    }
+  });
+</script>
+</body>
+</html>
